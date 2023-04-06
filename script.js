@@ -1,52 +1,10 @@
-// async function genImg(){
-//     const orderMessage = document.getElementById("order-message");
-//     const loadMessage = document.getElementById("load-message");
-//     const inputText = document.querySelector("input").value;
-//     const result = document.getElementById("result");
-//     const Img = document.querySelector("img");
-
-//     orderMessage.style.display = "none";
-//     loadMessage.style.display = "block";
-//     result.style.display = "none";
-//     Img.src = "";
-
-//     var data ={
-//         "model": "image-alpha-001",
-//         "prompt": inputText,
-//         "num_images": 1
-//     }
-//     await fetch("https://api.openai.com/v1/images/generations",{
-//         method: "POST",
-//         headers:{
-//             "Content-Type": "application/json",
-//             "Authorization": "Bearer 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" // API KEY 키 입력
-//         },
-//         body: JSON.stringify(data)
-//     })
-//     .then(response => response.json())
-//     .then(data =>{
-//         Img.src = data.data[0].url;
-//         result.style.display = "flex";
-//         loadMessage.style.display = "none";
-//         orderMessage.textContent = inputText;
-//         orderMessage.style.display = "block";
-//     })
-// }
-
-// function handleKeyDown(event){
-//     if (event.keyCode === 13){ // Enter key code
-//         event.preventDefault();
-//         genImg();
-//     }
-// }
-
 const orderMessage = document.getElementById("order-message");
 const loadMessage = document.getElementById("load-message");
 const inputText = document.querySelector("input");
 const result = document.getElementById("result");
 const Img = document.querySelector("img");
 
-const API_KEY = "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";
+const API_KEY = "your_key";
 
 function showLoadMessage() {
   orderMessage.style.display = "none";
