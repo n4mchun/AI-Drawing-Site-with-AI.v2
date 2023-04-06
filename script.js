@@ -1,60 +1,44 @@
 const orderMessage = document.getElementById("order-message");
 const loadMessage = document.getElementById("load-message");
-const inputText = document.querySelector("input");
 const result = document.getElementById("result");
 const Img = document.querySelector("img");
 
-const API_KEY = "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";
+const API_KEY = "YOUR_API_KEY";
 
 function showLoadMessage() {
-    orderMessage.style.display = "none";
     loadMessage.style.display = "block";
+    orderMessage.textContent = "";
     result.style.display = "none";
     Img.src = "";
 }
 
-function showResultMessage(inputText) {
+function showResultMessage(inputText, res) {
+    Img.src = res.data[0].url;
     result.style.display = "flex";
     loadMessage.style.display = "none";
     orderMessage.textContent = inputText;
-    orderMessage.style.display = "block";
 }
 
 async function genImg() {
+    const inputText = document.querySelector("input").value;
     showLoadMessage();
-
-    const prompt = inputText.value;
-    const data = {
-        model: "image-alpha-001",
-        prompt,
-        num_images: 1,
-    };
-
-    try {
-        const response = await fetch(
-        "https://api.openai.com/v1/images/generations",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${API_KEY}`,
-            },
-            body: JSON.stringify(data),
-        }
-    );
-
-    if (!response.ok) {
-        throw new Error("Network response was not ok");
+    var data ={
+        "model": "image-alpha-001",
+        "prompt": inputText,
+        "num_images": 1
     }
-
-    const responseData = await response.json();
-    const imgUrl = responseData.data[0].url;
-
-    Img.src = imgUrl;
-    showResultMessage(prompt);
-    } catch (error) {
-        console.error("Error:", error);
-    }
+    await fetch("https://api.openai.com/v1/images/generations",{
+        method: "POST",
+        headers:{
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${API_KEY}`
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(res =>{
+        showResultMessage(inputText, res);
+    })
 }
 
 function handleKeyDown(event) {
