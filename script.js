@@ -4,34 +4,34 @@ const inputText = document.querySelector("input");
 const result = document.getElementById("result");
 const Img = document.querySelector("img");
 
-const API_KEY = "your_key";
+const API_KEY = "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";
 
 function showLoadMessage() {
-  orderMessage.style.display = "none";
-  loadMessage.style.display = "block";
-  result.style.display = "none";
-  Img.src = "";
+    orderMessage.style.display = "none";
+    loadMessage.style.display = "block";
+    result.style.display = "none";
+    Img.src = "";
 }
 
 function showResultMessage(inputText) {
-  result.style.display = "flex";
-  loadMessage.style.display = "none";
-  orderMessage.textContent = inputText;
-  orderMessage.style.display = "block";
+    result.style.display = "flex";
+    loadMessage.style.display = "none";
+    orderMessage.textContent = inputText;
+    orderMessage.style.display = "block";
 }
 
 async function genImg() {
-  showLoadMessage();
+    showLoadMessage();
 
-  const prompt = inputText.value;
-  const data = {
-    model: "image-alpha-001",
-    prompt,
-    num_images: 1,
-  };
+    const prompt = inputText.value;
+    const data = {
+        model: "image-alpha-001",
+        prompt,
+        num_images: 1,
+    };
 
-  try {
-    const response = await fetch(
+    try {
+        const response = await fetch(
         "https://api.openai.com/v1/images/generations",
         {
             method: "POST",
@@ -52,9 +52,9 @@ async function genImg() {
 
     Img.src = imgUrl;
     showResultMessage(prompt);
-  } catch (error) {
-    console.error("Error:", error);
-  }
+    } catch (error) {
+        console.error("Error:", error);
+    }
 }
 
 function handleKeyDown(event) {
