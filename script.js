@@ -4,7 +4,7 @@ const inputText = document.querySelector("input");
 const result = document.getElementById("result");
 const Img = document.querySelector("img");
 
-const API_KEY = "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";
+const API_KEY = "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";
 
 function showLoadMessage() {
     orderMessage.style.display = "none";
